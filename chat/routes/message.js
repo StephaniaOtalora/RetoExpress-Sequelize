@@ -32,6 +32,7 @@ router.post("/", function (req, res, next) {
     author: req.body.author,
     ts: req.body.ts,
   }).then((result) => {
+    console.log(result)
     res.send(result);
   });
 });
@@ -62,14 +63,14 @@ router.delete("/:ts", (req, res) => {
   });
 });
 
-const validateMessage = (message) => {
-  const schema = Joi.object({
+const validateMessage = (mes) => {
+  const schema = Joi.object({ 
     message: Joi.string().min(5).required(),
-    author: Joi.string()+" "+Joi.string().required(),
+    author: Joi.string().required(),
     ts: Joi.string().required(),
   });
-
-  return schema.validate(message);
+  
+  return schema.validate(mes);
 };
 
 module.exports = router;
